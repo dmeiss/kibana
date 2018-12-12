@@ -5,6 +5,8 @@
  */
 
 import 'babel-polyfill';
+import { applyFunctionStrings } from '../../strings';
+
 import { functions } from './index';
 
-functions.forEach(canvas.register);
+applyFunctionStrings(functions).forEach(canvas.register);

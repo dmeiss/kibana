@@ -5,6 +5,7 @@
  */
 
 import { isValidUrl } from '../../../common/lib/url';
+import { functionErrors } from '../../errors';
 
 export const containerStyle = () => ({
   name: 'containerStyle',
@@ -68,7 +69,7 @@ export const containerStyle = () => ({
 
     if (backgroundImage) {
       if (!isValidUrl(backgroundImage)) {
-        throw new Error('Invalid backgroundImage. Please provide an asset or a URL.');
+        throw functionErrors.containerStyle.backgroundImageInvalid();
       }
       style.backgroundImage = `url(${backgroundImage})`;
       style.backgroundSize = backgroundSize;

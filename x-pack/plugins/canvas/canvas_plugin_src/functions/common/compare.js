@@ -4,6 +4,8 @@
  * you may not use this file except in compliance with the Elastic License.
  */
 
+import { functionErrors } from '../../errors';
+
 export const compare = () => ({
   name: 'compare',
   help:
@@ -61,7 +63,7 @@ export const compare = () => ({
         }
         return false;
       default:
-        throw new Error('Invalid compare operator. Use eq, ne, lt, gt, lte, or gte.');
+        throw functionErrors.compare.operatorInvalid();
     }
 
     return false;

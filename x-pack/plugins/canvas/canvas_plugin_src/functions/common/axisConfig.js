@@ -5,6 +5,8 @@
  */
 
 import moment from 'moment';
+import { functionErrors } from '../../errors';
+
 export const axisConfig = () => ({
   name: 'axisConfig',
   aliases: [],
@@ -42,33 +44,28 @@ export const axisConfig = () => ({
   },
   fn: (context, args) => {
     const positions = ['top', 'bottom', 'left', 'right', ''];
-    if (!positions.includes(args.position)) {
-      throw new Error(`Invalid position ${args.position}`);
+    const { position, min, max, ...rest } = args;
+
+    if (!positions.includes(position)) {
+      throw functionErrors.axisConfig.positionInvalid(position);
     }
 
-    const min = typeof args.min === 'string' ? moment.utc(args.min).valueOf() : args.min;
-    const max = typeof args.max === 'string' ? moment.utc(args.max).valueOf() : args.max;
+    const minVal = typeof args.min === 'string' ? moment.utc(args.min).valueOf() : args.min;
+    const maxVal = typeof args.max === 'string' ? moment.utc(args.max).valueOf() : args.max;
 
-    if (min != null && isNaN(min)) {
-      throw new Error(
-        `Invalid date string '${
-          args.min
-        }' found. 'min' must be a number, date in ms, or ISO8601 date string`
-      );
+    if (minVal != null && isNaN(minVal)) {
+      throw functionErrors.axisConfig.minInvalid(min);
     }
-    if (max != null && isNaN(max)) {
-      throw new Error(
-        `Invalid date string '${
-          args.max
-        }' found. 'max' must be a number, date in ms, or ISO8601 date string`
-      );
+    if (maxVal != null && isNaN(maxVal)) {
+      throw functionErrors.axisConfig.maxInvalid(max);
     }
 
     return {
+      min: minVal,
+      max: maxVal,
       type: 'axisConfig',
-      ...args,
-      min,
-      max,
+      position,
+      ...rest,
     };
   },
 });
