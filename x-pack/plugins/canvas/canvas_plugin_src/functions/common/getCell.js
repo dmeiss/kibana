@@ -4,6 +4,8 @@
  * you may not use this file except in compliance with the Elastic License.
  */
 
+import { functionErrors } from '../../errors';
+
 export const getCell = () => ({
   name: 'getCell',
   help: 'Fetch a single cell in a table',
@@ -26,14 +28,14 @@ export const getCell = () => ({
   fn: (context, args) => {
     const row = context.rows[args.row];
     if (!row) {
-      throw new Error(`Row not found: ${args.row}`);
+      throw functionErrors.getCell.rowNotFound(row);
     }
 
     const { column = context.columns[0].name } = args;
     const value = row[column];
 
     if (typeof value === 'undefined') {
-      throw new Error(`Column not found: ${column}`);
+      throw functionErrors.getCell.columnNotFound(column);
     }
 
     return value;

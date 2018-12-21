@@ -4,6 +4,7 @@
  * you may not use this file except in compliance with the Elastic License.
  */
 
+import { functionErrors } from '../../errors';
 import { resolveWithMissingImage } from '../../../common/lib/resolve_dataurl';
 import { elasticOutline } from '../../lib/elastic_outline';
 
@@ -35,7 +36,7 @@ export const revealImage = () => ({
   },
   fn: (percent, args) => {
     if (percent > 1 || percent < 0) {
-      throw new Error('input must be between 0 and 1');
+      throw functionErrors.revealImage.inputInvalid();
     }
 
     return {

@@ -5,9 +5,10 @@
  */
 
 import { get } from 'lodash';
+import { functionErrors } from '../../errors';
 import { openSans } from '../../../common/lib/fonts';
 
-const shapes = [
+export const PROGRESS_SHAPES = [
   'gauge',
   'horizontalBar',
   'horizontalPill',
@@ -30,8 +31,8 @@ export const progress = () => ({
     shape: {
       type: ['string'],
       alias: ['_'],
-      help: `Select ${shapes.slice(0, -1).join(', ')}, or ${shapes.slice(-1)[0]}`,
-      options: shapes,
+      help: `Select ${PROGRESS_SHAPES.slice(0, -1).join(', ')}, or ${PROGRESS_SHAPES.slice(-1)[0]}`,
+      options: PROGRESS_SHAPES,
       default: 'gauge',
     },
     max: {
@@ -72,10 +73,10 @@ export const progress = () => ({
   },
   fn: (value, args) => {
     if (args.max <= 0) {
-      throw new Error(`'max' must be greater than 0`);
+      throw functionErrors.progress.maxArgumentInvalid();
     }
     if (value > args.max || value < 0) {
-      throw new Error(`Context must be between 0 and ${args.max}`);
+      throw functionErrors.progress.invalidContext(value);
     }
 
     let label = '';

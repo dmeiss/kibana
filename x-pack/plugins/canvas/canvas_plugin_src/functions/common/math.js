@@ -5,6 +5,7 @@
  */
 
 import { evaluate } from 'tinymath';
+import { functionErrors } from '../../errors';
 import { pivotObjectArray } from '../../../common/lib/pivot_object_array';
 
 export const math = () => ({
@@ -26,7 +27,7 @@ export const math = () => ({
   },
   fn: (context, args) => {
     if (!args.expression || args.expression.trim() === '') {
-      throw new Error('Empty expression');
+      throw functionErrors.math.expressionEmpty();
     }
 
     const isDatatable = context && context.type === 'datatable';
@@ -39,17 +40,15 @@ export const math = () => ({
         if (result.length === 1) {
           return result[0];
         }
-        throw new Error(
-          'Expressions must return a single number. Try wrapping your expression in mean() or sum()'
-        );
+        throw functionErrors.math.resultLengthInvalid();
       }
       if (isNaN(result)) {
-        throw new Error('Failed to execute math expression. Check your column names');
+        throw functionErrors.math.executeFailure();
       }
       return result;
     } catch (e) {
       if (context.rows.length === 0) {
-        throw new Error('Empty datatable');
+        throw functionErrors.math.datatableEmpty();
       } else {
         throw e;
       }

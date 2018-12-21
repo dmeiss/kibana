@@ -3,8 +3,8 @@
  * or more contributor license agreements. Licensed under the Elastic License;
  * you may not use this file except in compliance with the Elastic License.
  */
-
 import { groupBy, flatten, pick, map } from 'lodash';
+import { functionErrors } from '../../errors';
 
 function combineColumns(arrayOfColumnsArrays) {
   return arrayOfColumnsArrays.reduce((resultingColumns, columns) => {
@@ -31,7 +31,7 @@ function combineAcross(datatableArray) {
   // Sanity check
   datatableArray.forEach(datatable => {
     if (datatable.rows.length !== targetRowLength) {
-      throw new Error('All expressions must return the same number of rows');
+      throw functionErrors.ply.rowCountInvalid();
     }
   });
 
@@ -95,7 +95,7 @@ export const ply = () => ({
       byColumns = args.by.map(by => {
         const column = context.columns.find(column => column.name === by);
         if (!column) {
-          throw new Error(`No such column: ${by}`);
+          throw functionErrors.ply.columnNotFound(by);
         }
         return column;
       });
