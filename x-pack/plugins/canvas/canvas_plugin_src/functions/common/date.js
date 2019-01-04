@@ -5,7 +5,9 @@
  */
 
 import moment from 'moment';
-import { functionErrors } from '../../errors';
+import { getFunctionErrors } from '../../errors';
+
+const functionErrors = getFunctionErrors();
 
 const getInputDate = input => {
   // return current date if no input

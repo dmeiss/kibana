@@ -5,7 +5,9 @@
  */
 
 import { isValidUrl } from '../../../common/lib/url';
-import { functionErrors } from '../../errors';
+import { getFunctionErrors } from '../../errors';
+
+const functionErrors = getFunctionErrors();
 
 export const containerStyle = () => ({
   name: 'containerStyle',

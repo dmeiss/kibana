@@ -6,6 +6,9 @@
 
 import { resolve, join } from 'path';
 
+import { i18nProvider } from '../canvas_plugin_src/strings';
+i18nProvider.init();
+
 export default function testTasks(gulp, { mocha }) {
   const canvasRoot = resolve(__dirname, '..');
 

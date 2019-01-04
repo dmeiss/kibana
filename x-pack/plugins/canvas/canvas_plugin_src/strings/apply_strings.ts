@@ -5,7 +5,7 @@
  */
 
 import { ElementFactory } from '../elements/types';
-import { functionHelp, getElementStrings } from './index';
+import { getElementStrings, getFunctionHelp } from './index';
 
 // This type is temporary for compatibility.  Replace with Function spec type when available.
 type FunctionSpecFactory = () => {
@@ -24,7 +24,7 @@ type FunctionSpecFactory = () => {
  * so the specifications themselves have no dependency on i18n, for clarity for both
  * our and external plugin developers.
  */
-export const applyElementStrings = (elements: ElementFactory[]) => {
+export const applyElementStrings = (elements: ElementFactory[]): ElementFactory[] => {
   const elementStrings = getElementStrings();
 
   return elements.map(spec => {
@@ -49,8 +49,10 @@ export const applyElementStrings = (elements: ElementFactory[]) => {
   });
 };
 
-export const applyFunctionStrings = (functions: FunctionSpecFactory[]) =>
-  functions.map(spec => {
+export const applyFunctionStrings = (functions: FunctionSpecFactory[]): FunctionSpecFactory[] => {
+  const functionHelp = getFunctionHelp();
+
+  return functions.map(spec => {
     const result = spec();
     const { name } = result;
     const helpStrings = functionHelp[name];
@@ -76,3 +78,4 @@ export const applyFunctionStrings = (functions: FunctionSpecFactory[]) =>
     }
     return () => result;
   });
+};

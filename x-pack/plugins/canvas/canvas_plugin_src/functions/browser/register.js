@@ -5,8 +5,14 @@
  */
 
 import 'babel-polyfill';
-import { applyFunctionStrings } from '../../strings';
 
+import { applyFunctionStrings, i18nProvider } from '../../strings';
 import { functions } from './index';
 
-applyFunctionStrings(functions).forEach(canvas.register);
+const { i18n, register } = canvas;
+
+// i18n is only available from Kibana when specs are registered.  Init the Canvas i18n Provider with that instance.
+i18nProvider.init(i18n);
+
+// Apply localized strings to the Browser Function specs, then register them.
+applyFunctionStrings(functions).forEach(register);
