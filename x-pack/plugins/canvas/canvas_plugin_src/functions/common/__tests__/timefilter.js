@@ -8,7 +8,10 @@ import expect from 'expect.js';
 import sinon from 'sinon';
 import { timefilter } from '../timefilter';
 import { functionWrapper } from '../../../../__tests__/helpers/function_wrapper';
+import { getFunctionErrors } from '../../../errors';
 import { emptyFilter } from './fixtures/test_filters';
+
+const functionErrors = getFunctionErrors();
 
 let clock = null;
 
@@ -88,7 +91,7 @@ describe('timefilter', () => {
 
       it('throws when provided an invalid date string', () => {
         expect(() => fn(emptyFilter, { from: '2018-13-42T15:00:00.950Z' })).to.throwException(e => {
-          expect(e.message).to.be.equal('Invalid date/time string 2018-13-42T15:00:00.950Z');
+          expect(e.message).to.be.equal(functionErrors.timefilter.stringInvalid().message);
         });
       });
     });

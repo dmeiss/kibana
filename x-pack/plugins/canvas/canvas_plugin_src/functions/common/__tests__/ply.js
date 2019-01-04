@@ -7,7 +7,10 @@
 import expect from 'expect.js';
 import { ply } from '../ply';
 import { functionWrapper } from '../../../../__tests__/helpers/function_wrapper';
+import { getFunctionErrors } from '../../../errors';
 import { testTable } from './fixtures/test_tables';
+
+const functionErrors = getFunctionErrors();
 
 const averagePrice = datatable => {
   const average = datatable.rows.reduce((sum, row) => sum + row.price, 0) / datatable.rows.length;
@@ -82,12 +85,12 @@ describe('ply', () => {
       it('throws when by is an invalid column', () => {
         expect(() => fn(testTable, { by: [''], expression: [averagePrice] })).to.throwException(
           e => {
-            expect(e.message).to.be('No such column: ');
+            expect(e.message).to.be(functionErrors.ply.columnNotFound('').message);
           }
         );
         expect(() => fn(testTable, { by: ['foo'], expression: [averagePrice] })).to.throwException(
           e => {
-            expect(e.message).to.be('No such column: foo');
+            expect(e.message).to.be(functionErrors.ply.columnNotFound('foo').message);
           }
         );
       });
@@ -108,7 +111,7 @@ describe('ply', () => {
 
       it('throws when row counts do not match across resulting datatables', () => {
         return fn(testTable, { by: ['name'], expression: [doublePrice, rowCount] }).catch(e =>
-          expect(e.message).to.be('All expressions must return the same number of rows')
+          expect(e.message).to.be(functionErrors.ply.rowCountInvalid().message)
         );
       });
     });

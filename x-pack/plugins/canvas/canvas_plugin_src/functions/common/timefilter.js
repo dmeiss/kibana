@@ -5,6 +5,9 @@
  */
 
 import dateMath from '@elastic/datemath';
+import { getFunctionErrors } from '../../errors';
+
+const functionErrors = getFunctionErrors();
 
 export const timefilter = () => ({
   name: 'timefilter',
@@ -50,7 +53,7 @@ export const timefilter = () => ({
 
       const moment = dateMath.parse(str);
       if (!moment || !moment.isValid()) {
-        throw new Error(`Invalid date/time string ${str}`);
+        throw functionErrors.timefilter.stringInvalid();
       }
       return moment.toISOString();
     }

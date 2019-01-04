@@ -4,7 +4,9 @@
  * you may not use this file except in compliance with the Elastic License.
  */
 
-import { functionErrors } from '../../errors';
+import { getFunctionErrors } from '../../errors';
+
+const functionErrors = getFunctionErrors();
 
 export const getCell = () => ({
   name: 'getCell',
@@ -28,7 +30,7 @@ export const getCell = () => ({
   fn: (context, args) => {
     const row = context.rows[args.row];
     if (!row) {
-      throw functionErrors.getCell.rowNotFound(row);
+      throw functionErrors.getCell.rowNotFound(args.row);
     }
 
     const { column = context.columns[0].name } = args;

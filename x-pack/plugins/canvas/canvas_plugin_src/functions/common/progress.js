@@ -5,8 +5,10 @@
  */
 
 import { get } from 'lodash';
-import { functionErrors } from '../../errors';
+import { getFunctionErrors } from '../../errors';
 import { openSans } from '../../../common/lib/fonts';
+
+const functionErrors = getFunctionErrors();
 
 export const PROGRESS_SHAPES = [
   'gauge',

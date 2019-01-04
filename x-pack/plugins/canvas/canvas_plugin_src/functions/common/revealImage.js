@@ -4,9 +4,11 @@
  * you may not use this file except in compliance with the Elastic License.
  */
 
-import { functionErrors } from '../../errors';
+import { getFunctionErrors } from '../../errors';
 import { resolveWithMissingImage } from '../../../common/lib/resolve_dataurl';
 import { elasticOutline } from '../../lib/elastic_outline';
+
+const functionErrors = getFunctionErrors();
 
 export const revealImage = () => ({
   name: 'revealImage',

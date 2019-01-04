@@ -5,8 +5,10 @@
  */
 
 import { evaluate } from 'tinymath';
-import { functionErrors } from '../../errors';
+import { getFunctionErrors } from '../../errors';
 import { pivotObjectArray } from '../../../common/lib/pivot_object_array';
+
+const functionErrors = getFunctionErrors();
 
 export const math = () => ({
   name: 'math',

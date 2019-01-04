@@ -9,6 +9,9 @@ import { revealImage } from '../revealImage';
 import { functionWrapper } from '../../../../__tests__/helpers/function_wrapper';
 import { elasticOutline } from '../../../lib/elastic_outline';
 import { elasticLogo } from '../../../lib/elastic_logo';
+import { getFunctionErrors } from '../../../errors';
+
+const functionErrors = getFunctionErrors();
 
 describe('revealImage', () => {
   const fn = functionWrapper(revealImage);
@@ -29,7 +32,7 @@ describe('revealImage', () => {
           origin: 'top',
         })
         .to.throwException(e => {
-          expect(e.message).to.be.equal('input must be between 0 and 1');
+          expect(e.message).to.be.equal(functionErrors.revealImage.inputInvalid().message);
         });
 
       expect(fn)
@@ -39,7 +42,7 @@ describe('revealImage', () => {
           origin: 'top',
         })
         .to.throwException(e => {
-          expect(e.message).to.be.equal('input must be between 0 and 1');
+          expect(e.message).to.be.equal(functionErrors.revealImage.inputInvalid().message);
         });
     });
   });

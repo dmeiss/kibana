@@ -5,9 +5,10 @@
  */
 
 import inlineStyle from 'inline-style';
-import { functionErrors } from '../../errors';
+import { getFunctionErrors } from '../../errors';
 import { openSans } from '../../../common/lib/fonts';
 
+const functionErrors = getFunctionErrors();
 const weights = [
   'normal',
   'bold',
@@ -84,7 +85,7 @@ export const font = () => ({
       throw functionErrors.font.weightInvalid(args.weight);
     }
     if (!alignments.includes(args.align)) {
-      throw functionErrors.font.weightInvalid(args.align);
+      throw functionErrors.font.alignmentInvalid(args.align);
     }
 
     // the line height shouldn't ever be lower than the size
