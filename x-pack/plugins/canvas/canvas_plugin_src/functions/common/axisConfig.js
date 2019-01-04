@@ -50,8 +50,8 @@ export const axisConfig = () => ({
       throw functionErrors.axisConfig.positionInvalid(position);
     }
 
-    const minVal = typeof args.min === 'string' ? moment.utc(args.min).valueOf() : args.min;
-    const maxVal = typeof args.max === 'string' ? moment.utc(args.max).valueOf() : args.max;
+    const minVal = typeof min === 'string' ? moment.utc(min).valueOf() : min;
+    const maxVal = typeof max === 'string' ? moment.utc(max).valueOf() : max;
 
     if (minVal != null && isNaN(minVal)) {
       throw functionErrors.axisConfig.minInvalid(min);
