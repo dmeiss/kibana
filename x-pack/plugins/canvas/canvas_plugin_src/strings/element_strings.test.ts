@@ -5,7 +5,6 @@
  */
 
 import { i18nProvider } from './i18n_provider';
-i18nProvider.init();
 
 import { getElementStrings } from '.';
 import { elementSpecs } from '../elements';
