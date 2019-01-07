@@ -4,7 +4,7 @@
  * you may not use this file except in compliance with the Elastic License.
  */
 
-import { i18nProvider } from './i18n_provider';
+import { i18n } from './i18n';
 
 interface FunctionHelp {
   help: string;
@@ -16,8 +16,6 @@ interface FunctionHelpDict {
 }
 
 export const getFunctionHelp = (): FunctionHelpDict => {
-  const i18n = i18nProvider.getInstance();
-
   return {
     all: {
       help: i18n.translate('xpack.canvas.functions.all.args.conditionHelpText', {

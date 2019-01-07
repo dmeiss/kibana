@@ -4,13 +4,10 @@
  * you may not use this file except in compliance with the Elastic License.
  */
 
-import { applyFunctionStrings, i18nProvider } from '../../strings';
+import { applyFunctionStrings } from '../../strings';
 import { functions } from './src/index';
 
-const { i18n, register } = canvas;
-
-// i18n is only available from Kibana when specs are registered.  Init the Canvas i18n Provider with that instance.
-i18nProvider.init(i18n);
+const { register } = canvas;
 
 // Apply localized strings to the Common Function specs, then register them.
 applyFunctionStrings(functions).forEach(register);

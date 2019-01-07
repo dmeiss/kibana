@@ -3,7 +3,7 @@
  * or more contributor license agreements. Licensed under the Elastic License;
  * you may not use this file except in compliance with the Elastic License.
  */
-import { i18nProvider } from '../strings';
+import { i18n } from '../strings';
 
 type FunctionErrorFactory = (...args: string[]) => Error;
 
@@ -17,8 +17,6 @@ interface FunctionErrorDict {
  * throwable, properly localized Errors.
  */
 export const getFunctionErrors = (): FunctionErrorDict => {
-  const i18n = i18nProvider.getInstance();
-
   return {
     alterColumn: {
       columnNotFound: (column: string) =>
