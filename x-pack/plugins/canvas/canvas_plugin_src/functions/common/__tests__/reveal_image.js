@@ -11,9 +11,8 @@ import { elasticOutline } from '../../../lib/elastic_outline';
 import { elasticLogo } from '../../../lib/elastic_logo';
 import { getFunctionErrors } from '../../../errors';
 
-const functionErrors = getFunctionErrors();
-
 describe('revealImage', () => {
+  const functionErrors = getFunctionErrors();
   const fn = functionWrapper(revealImage);
 
   it('returns a render as revealImage', () => {

@@ -6,8 +6,6 @@
 import { groupBy, flatten, pick, map } from 'lodash';
 import { getFunctionErrors } from '../../errors';
 
-const functionErrors = getFunctionErrors();
-
 function combineColumns(arrayOfColumnsArrays) {
   return arrayOfColumnsArrays.reduce((resultingColumns, columns) => {
     if (columns) {
@@ -27,6 +25,7 @@ function combineColumns(arrayOfColumnsArrays) {
 // This handles merging the tables produced by multiple expressions run on a single member of the `by` split.
 // Thus all tables must be the same length, although their columns do not need to be the same, we will handle combining the columns
 function combineAcross(datatableArray) {
+  const functionErrors = getFunctionErrors();
   const [referenceTable] = datatableArray;
   const targetRowLength = referenceTable.rows.length;
 
@@ -97,6 +96,7 @@ export const ply = () => ({
       byColumns = args.by.map(by => {
         const column = context.columns.find(column => column.name === by);
         if (!column) {
+          const functionErrors = getFunctionErrors();
           throw functionErrors.ply.columnNotFound(by);
         }
         return column;

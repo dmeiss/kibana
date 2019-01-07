@@ -10,9 +10,8 @@ import { functionWrapper } from '../../../../__tests__/helpers/function_wrapper'
 import { getFunctionErrors } from '../../../errors';
 import { fontStyle } from './fixtures/test_styles';
 
-const functionErrors = getFunctionErrors();
-
 describe('progress', () => {
+  const functionErrors = getFunctionErrors();
   const fn = functionWrapper(progress);
   const value = 0.33;
 

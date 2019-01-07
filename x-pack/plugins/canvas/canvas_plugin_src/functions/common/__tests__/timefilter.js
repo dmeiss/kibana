@@ -11,8 +11,6 @@ import { functionWrapper } from '../../../../__tests__/helpers/function_wrapper'
 import { getFunctionErrors } from '../../../errors';
 import { emptyFilter } from './fixtures/test_filters';
 
-const functionErrors = getFunctionErrors();
-
 let clock = null;
 
 beforeEach(function() {
@@ -24,6 +22,7 @@ afterEach(function() {
 });
 
 describe('timefilter', () => {
+  const functionErrors = getFunctionErrors();
   const fn = functionWrapper(timefilter);
   const fromDate = '2018-02-06T15:00:00.950Z';
   const toDate = '2018-02-07T15:00:00.950Z';

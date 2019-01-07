@@ -10,8 +10,6 @@ import { functionWrapper } from '../../../../__tests__/helpers/function_wrapper'
 import { getFunctionErrors } from '../../../errors';
 import { testTable } from './fixtures/test_tables';
 
-const functionErrors = getFunctionErrors();
-
 const averagePrice = datatable => {
   const average = datatable.rows.reduce((sum, row) => sum + row.price, 0) / datatable.rows.length;
 
@@ -67,6 +65,7 @@ describe('ply', () => {
   });
 
   describe('missing args', () => {
+    const functionErrors = getFunctionErrors();
     it('returns the original datatable if both args are missing', () => {
       return fn(testTable).then(result => expect(result).to.eql(testTable));
     });
@@ -97,6 +96,8 @@ describe('ply', () => {
     });
 
     describe('expression', () => {
+      const functionErrors = getFunctionErrors();
+
       it('returns the original datatable grouped by the specified columns', () => {
         const arbitaryRowIndex = 6;
 
