@@ -3,7 +3,7 @@
 
 [partintro]
 --
-This section includes information on how to setup Kibana and get it running,
+This section includes information on how to set up Kibana and get it running,
 including:
 
 * Downloading
