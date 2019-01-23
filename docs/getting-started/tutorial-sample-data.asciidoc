@@ -12,7 +12,7 @@ You can load the data and preconfigured dashboard from the {kib} home page.
 . Click *View data*.
 
 You’re taken to the *Global Flight* dashboard, a collection of charts, graphs, 
-maps, and other visualizations of the the data in the `kibana_sample_data_flights` index.
+maps, and other visualizations of the data in the `kibana_sample_data_flights` index.
 
 [role="screenshot"]
 image::images/tutorial-sample-dashboard.png[]
